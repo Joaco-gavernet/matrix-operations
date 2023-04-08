@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 #define DIM 10
-#define AM 2
-#define AN 2
-#define BM 2
+#define AM 3
+#define AN 3
+#define BM 3
 #define BN 2
 
 #define forn(i, n) for (i = 0; i < n; i++)
@@ -19,15 +19,14 @@ void printMatrix (int matrix[][DIM], int m, int n) {
     printf("//////////////\n");
 }
 
-void sumationMatrix (int A[][dim], int B[][dim], int C[][dim], int m, int n) {
+int sumaDefinida(int am, int an, int bm, int bn) {
+    return (am == bm) && (an == bn);
+}
+
+void sumarMatrices (const int A[][DIM], const int B[][DIM], int C[][DIM], int m, int n) {
     int i,j;
     forn(i,m) forn(j,n) C[i][j] = A[i][j] + B[i][j];
 }
-
-int sumaDefinida(int an, int am, int bn, int bm) {
-    return (an == bn) && (am == bm);
-}
-
 
 int * productoDefinido (int am, int an, int bm, int bn) {
     int result[2];
@@ -62,24 +61,24 @@ int * productoMatrices (int a[][DIM], int b[][DIM], int result[DIM][DIM], int am
 
 int main()
 {
-    int matrizA[DIM][DIM] = {{1, 2}, {3, 4}};
-    int matrizB[DIM][DIM] = {{5, 6}, {7, 8}};
+    int matrizA[DIM][DIM] = {{1, 2, 3}, {1, 0, -1}, {1, 1, 1}};
+    int matrizB[DIM][DIM] = {{1, 2}, {2, 1}, {1, 1}};
     int resultado[DIM][DIM] = {0};
-    int *dimension_resultado;
+    int *dimension_resultado; // dimension de matriz resultado de producto
 
     printMatrix(matrizA, AM, AN);
     printMatrix(matrizB, BM, BN);
 
     productoMatrices(matrizA, matrizB, resultado, AM, AN, BM, BN);
     dimension_resultado = productoDefinido(AM, AN, BM, BN);
+    printf("Producto: ");
     printMatrix(resultado, dimension_resultado[0], dimension_resultado[1]);
 
-    
+    if (sumaDefinida(AM, AN, BM, BN)) {
+        sumarMatrices(matrizA, matrizB, resultado, AM, AN);
+        printMatrix(resultado, AM, AN);
+    }
 
-
-//    int *defined;
-//    defined = productoDefinido(3, 3, 3, 3);
-//    printf("producto definido? -> %d", defined[0]);
 
     return 0;
 }
