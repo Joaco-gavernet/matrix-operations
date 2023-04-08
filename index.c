@@ -19,6 +19,16 @@ void printMatrix (int matrix[][DIM], int m, int n) {
     printf("//////////////\n");
 }
 
+void sumationMatrix (int A[][dim], int B[][dim], int C[][dim], int m, int n) {
+    int i,j;
+    forn(i,m) forn(j,n) C[i][j] = A[i][j] + B[i][j];
+}
+
+int sumaDefinida(int an, int am, int bn, int bm) {
+    return (an == bn) && (am == bm);
+}
+
+
 int * productoDefinido (int am, int an, int bm, int bn) {
     int result[2];
     if (an == bm) {
